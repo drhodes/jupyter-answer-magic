@@ -1,7 +1,7 @@
 
 Jupyter notebooks may be extended with something called linemagic
-(among other types).  This line magic dumps allows users to dump
-specified variables out to a file that can be used for grading.
+(among other types).  This line magic allows users to dump specified
+variables out to a file that can be used for grading.
 
 Each Jupyter user has and directory located at
 `~/.ipython/profile_default/startup`.
