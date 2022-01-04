@@ -7,7 +7,19 @@ Each Jupyter user has and directory located at
 `~/.ipython/profile_default/startup`.
 
 `custom_magic.py` should be placed in that directory to ensure that it
-is loaded when either a jupyter notebook or an ipython interpreter is started.
+is loaded when either a jupyter notebook or an ipython interpreter is
+started.
+
+Currently each notebook needs a special cell for preparing the
+grader. Protect the cell by altering its metadata
+
+{
+  "trusted": true,
+  "editable": false,
+  "deletable": false
+}
+
+
 
 TODO:
 
