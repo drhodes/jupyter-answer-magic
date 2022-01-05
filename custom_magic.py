@@ -1,27 +1,27 @@
 from IPython.core.magic import register_line_magic
-import pickle
+import json
 from pathlib import Path
 
-def get_pickle_data(fpath):
+def get_json_data(fpath):
     if fpath.exists():
         try:
-            with open(fpath.name, 'rb') as f:            
-                return pickle.load(f)
-        except EOFError:            
+            with open(fpath.name, 'r') as f:            
+                return json.load(f)
+        except:            
             return {}
     else:
         return {}
     
 def dumpvar(varname, value):
-    # should be serialized to json instead of pickle for security
+    # should be serialized to json instead of json for security
     # reasons.
     
-    fpath = Path(pickle_name())
-    stored_lab_answers = get_pickle_data(fpath)
+    fpath = Path(json_name())
+    stored_lab_answers = get_json_data(fpath)
     stored_lab_answers[varname] = value
 
-    with open(fpath.name, 'wb+') as f:
-        pickle.dump(stored_lab_answers, f)
+    with open(fpath.name, 'w+') as f:
+        json.dump(stored_lab_answers, f)
         print(f'>> variable {varname} is ready to grade')
 
 #-----------------------------------------------------------------------------
@@ -39,16 +39,17 @@ def notebook_name():
         return __NOTEBOOK_NAME__
     raise NameError("notebook name not defined, please use %set_notebook_name")
 
-def pickle_name():
-    return notebook_name() + ".pickle"
+def json_name():
+    return notebook_name() + ".json"
 
 #-----------------------------------------------------------------------------
+#
 
 @register_line_magic
 def show_answers(*args):
     ''' output the current answers '''
-    fpath = Path(pickle_name())
-    stored_lab_answers = get_pickle_data(fpath)
+    fpath = Path(json_name())
+    stored_lab_answers = get_json_data(fpath)
     print((stored_lab_answers, fpath))
 
         
