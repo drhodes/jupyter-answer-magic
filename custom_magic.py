@@ -50,7 +50,7 @@ def show_answers(*args):
     ''' output the current answers '''
     fpath = Path(json_name())
     stored_lab_answers = get_json_data(fpath)
-    print((stored_lab_answers, fpath))
+    print((json.dumps(stored_lab_answers)))
 
         
 @register_line_magic
